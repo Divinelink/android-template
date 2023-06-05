@@ -2,8 +2,9 @@ import modules.sharedModule
 
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-  alias(libs.plugins.com.android.application)
+  alias(libs.plugins.application)
   alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.ksp)
 }
 
 android {
@@ -23,14 +24,22 @@ android {
       isMinifyEnabled = false
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
+
+    debug {
+      applicationIdSuffix = ".debug"
+      versionNameSuffix = " DEBUG"
+    }
   }
 
   buildFeatures {
+    buildConfig = true
     compose = true
   }
+
   composeOptions {
-    kotlinCompilerExtensionVersion = libs.versions.compose.compiler.extesion.toString()
+    kotlinCompilerExtensionVersion = libs.versions.compose.compiler.extesion.get()
   }
+
   packaging {
     resources {
       excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -39,26 +48,29 @@ android {
 }
 
 dependencies {
+  implementation(libs.androidx.core.ktx)
+  implementation(libs.androidx.lifecycle.runtime.ktx)
+  implementation(libs.androidx.start.up)
 
-  implementation(libs.core.ktx)
-  implementation(libs.lifecycle.runtime.ktx)
-  implementation(libs.activity.compose)
   implementation(platform(libs.compose.bom))
+  implementation(libs.compose.activity)
   implementation(libs.compose.ui)
   implementation(libs.compose.ui.graphics)
   implementation(libs.compose.ui.tooling.preview)
   implementation(libs.compose.material3)
 
+  implementation(libs.timber)
+
   testImplementation(libs.junit)
 
   androidTestImplementation(libs.androidx.test.ext.junit)
-  androidTestImplementation(libs.espresso.core)
+  androidTestImplementation(libs.androidx.espresso.core)
   androidTestImplementation(platform(libs.compose.bom))
   androidTestImplementation(libs.compose.ui.test.junit4)
   debugImplementation(libs.compose.ui.tooling)
   debugImplementation(libs.compose.ui.test.manifest)
 
 
-  // Custom modules
+// Custom modules
   implementation(sharedModule("resources"))
 }

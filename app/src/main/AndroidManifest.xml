@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
   <application
+      android:name=".template.Application"
       android:allowBackup="true"
       android:dataExtractionRules="@xml/data_extraction_rules"
       android:fullBackupContent="@xml/backup_rules"
@@ -13,9 +14,8 @@
       android:theme="@style/Theme.Template"
       tools:targetApi="31">
     <activity
-        android:name=".MainActivity"
+        android:name=".template.MainActivity"
         android:exported="true"
-        android:label="@string/app_name"
         android:theme="@style/Theme.Template">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -23,6 +23,17 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+
+    <provider
+        android:name="androidx.startup.InitializationProvider"
+        android:authorities="${applicationId}.androidx-startup"
+        android:exported="false"
+        tools:node="merge">
+      <meta-data
+          android:name="com.andreolas.template.initializers.TimberInitializer"
+          android:value="androidx.startup" />
+    </provider>
+
   </application>
 
 </manifest>

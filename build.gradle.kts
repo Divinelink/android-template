@@ -1,11 +1,12 @@
-import com.android.build.gradle.LibraryExtension
-import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.AppExtension
+import com.android.build.gradle.AppPlugin
+import com.android.build.gradle.BaseExtension
+import com.android.build.gradle.LibraryExtension
+import com.android.build.gradle.LibraryPlugin
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-  alias(libs.plugins.com.android.application) apply false
+  alias(libs.plugins.application) apply false
   alias(libs.plugins.kotlin.android) apply false
   alias(libs.plugins.com.android.library) apply false
 }
@@ -19,12 +20,12 @@ subprojects {
 fun PluginContainer.configureAppAndModules(project: Project) = apply {
   whenPluginAdded {
     when (this) {
-      is com.android.build.gradle.AppPlugin -> {
+      is AppPlugin -> {
         project.extensions
           .getByType<AppExtension>()
           .apply { applyAppCommons() }
       }
-      is com.android.build.gradle.LibraryPlugin -> {
+      is LibraryPlugin -> {
         project.extensions
           .getByType<LibraryExtension>()
           .apply { applyLibraryCommons() }
@@ -58,7 +59,7 @@ fun BaseExtension.applyBaseCommons() {
   }
 
   compileOptions.apply {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
   }
 }
