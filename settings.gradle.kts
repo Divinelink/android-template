@@ -18,3 +18,5 @@ include(
   ":app",
   ":modules:shared-resources",
 )
+include(":modules:api")
+include(":modules:di")

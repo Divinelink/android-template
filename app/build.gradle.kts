@@ -1,4 +1,5 @@
 import modules.sharedModule
+import modules.wModule
 
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
@@ -60,6 +61,7 @@ dependencies {
   implementation(libs.compose.material3)
 
   implementation(libs.timber)
+  implementation(libs.koin)
 
   testImplementation(libs.junit)
 
@@ -71,6 +73,7 @@ dependencies {
   debugImplementation(libs.compose.ui.test.manifest)
 
 
-// Custom modules
+  // Custom modules
+  implementation(wModule("di"))
   implementation(sharedModule("resources"))
 }
