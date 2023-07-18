@@ -1,4 +1,4 @@
-@file:Suppress("PropertyName")
+@file:Suppress("PropertyName", "ConstructorParameterNaming")
 
 package com.andreolas.theme.ui.theme
 
@@ -6,7 +6,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-data class AppComposeDimens(
+data class Dimensions(
   val keyline_0: Dp = 0.dp,
   val keyline_1: Dp = 1.dp,
   val keyline_2: Dp = 2.dp,
@@ -34,4 +34,4 @@ data class AppComposeDimens(
   val keyline_96: Dp = 96.dp,
 )
 
-internal val LocalDimensions = staticCompositionLocalOf { AppComposeDimens() }
+internal val LocalDimensions = staticCompositionLocalOf { Dimensions() }

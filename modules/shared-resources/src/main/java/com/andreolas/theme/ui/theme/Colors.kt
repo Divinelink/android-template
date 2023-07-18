@@ -1,3 +1,4 @@
+@file:Suppress("MagicNumber")
 package com.andreolas.theme.ui.theme
 
 import androidx.compose.material3.darkColorScheme
@@ -152,4 +153,4 @@ onError = LightColors.onError,
 )
  */
 
-//val LocalColors = staticCompositionLocalOf { lightColors() }
+// val LocalColors = staticCompositionLocalOf { lightColors() }

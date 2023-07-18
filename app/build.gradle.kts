@@ -6,6 +6,7 @@ plugins {
   alias(libs.plugins.application)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.ksp)
+  alias(libs.plugins.detekt) version libs.versions.detekt
 }
 
 android {
@@ -71,7 +72,6 @@ dependencies {
   androidTestImplementation(libs.compose.ui.test.junit4)
   debugImplementation(libs.compose.ui.tooling)
   debugImplementation(libs.compose.ui.test.manifest)
-
 
   // Custom modules
   implementation(wModule("di"))

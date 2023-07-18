@@ -7,7 +7,3 @@ plugins {
 android {
   namespace = "com.andreolas.api"
 }
-
-dependencies {
-
-}

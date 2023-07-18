@@ -22,11 +22,9 @@ object DepsQualifiers {
 
   val NOW_LONG = named("app.now")
 
-
   object Template {
     val ENDPOINT = named("app.template:endpoint")
     val ENDPOINT_URL = named("app.template:endpoint:url")
     val KTOR = named("app.template:ktor")
   }
-
 }

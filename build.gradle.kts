@@ -13,9 +13,9 @@ plugins {
 }
 true // Needed to make the Suppress annotation work for the plugins block
 
-
 subprojects {
   project.plugins.configureAppAndModules(project = project)
+  apply(from = buildscripts("detekt.gradle"))
 }
 
 fun PluginContainer.configureAppAndModules(project: Project) = apply {
@@ -44,7 +44,6 @@ fun AppExtension.applyAppCommons() {
     versionName = Versions.APP_VERSION_NAME
   }
 }
-
 
 fun LibraryExtension.applyLibraryCommons() {
   applyBaseCommons()

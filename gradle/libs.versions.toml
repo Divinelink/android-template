@@ -64,10 +64,14 @@ ktor-serialization-kotlinx-json = { group = 'io.ktor', name = 'ktor-serializatio
 kotlinx-serialization-json = { group = 'org.jetbrains.kotlinx', name = 'kotlinx-serialization-json', version.ref = 'kotlinx-serialization' }
 
 # Depedency Injection
-koin = { group =  "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 
 # Misc
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+
+# Detekt
+detekt-cli = { module = "io.gitlab.arturbosch.detekt:detekt-cli", version.ref = "detekt" }
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
 [plugins]
 application = { id = "com.android.application", version.ref = "agp" }
@@ -75,6 +79,7 @@ com-android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "detekt" }
+#detekt-cli = { module = "io.gitlab.arturbosch.detekt:detekt-cli", version.ref = "detekt-cli" }
+#detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt-cli" }
 
 [bundles]
-
