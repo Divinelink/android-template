@@ -9,6 +9,7 @@ plugins {
   alias(libs.plugins.application) apply false
   alias(libs.plugins.kotlin.android) apply false
   alias(libs.plugins.com.android.library) apply false
+  alias(libs.plugins.detekt) version libs.versions.detekt
 }
 true // Needed to make the Suppress annotation work for the plugins block
 

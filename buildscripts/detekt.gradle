@@ -1,0 +1,51 @@
+plugins {
+  id(libs.plugins.detekt) apply false
+}
+
+//apply plugin: "io.gitlab.arturbosch.detekt"
+
+
+configurations {
+  detekt
+}
+
+dependencies {
+  detekt("io.gitlab.arturbosch.detekt:detekt-cli:$libs.versions.detekt")
+  detekt("io.gitlab.arturbosch.detekt:detekt-formatting:$libs.versions.detekt")
+}
+
+task detekt {
+  group = "verification"
+  description = "Run Detekt static analysis"
+
+  def detektClasspath = configurations.detekt
+  def sourceFiles = fileTree("src/main/kotlin") {
+    include("**/*.kt")
+  }
+
+  doLast {
+    javaexec {
+      main = "io.gitlab.arturbosch.detekt.cli.Main"
+      classpath = detektClasspath
+
+      args("--config=$rootDir/detekt.yml",
+          "--classpath=${sourceFiles.asPath}")
+    }
+  }
+}
+
+task detektFormat {
+  group = "verification"
+  description = "Format Kotlin code using Detekt formatting rules"
+
+  doLast {
+    javaexec {
+      main = "io.gitlab.arturbosch.detekt.cli.Main"
+      classpath = configurations.detekt
+
+      args("--config=$rootDir/detekt.yml",
+          "--formatting",
+          "--auto-correct")
+    }
+  }
+}
