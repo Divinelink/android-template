@@ -29,13 +29,18 @@ tasks.register('detektCi', JavaExec) {
     def config = "$rootDir/buildconfig/detekt.yml"
     def exclude = ".*/resources/.*,.*/build/.*"
     def report = "html:${project.buildDir}/reports/detekt.html"
-    def params = ['--version',
-                  '--auto-correct',
-                  '-i', input,
-                  '-c', config,
-                  '-ex', exclude,
-                  '-r', report]
+    def autoCorrect = "--auto-correct"
+
+    def params = [
+        autoCorrect,
+        '-i', input,
+        '-c', config,
+        '-ex', exclude,
+        '-r', report
+    ]
+
     args(params)
+    jvmArgs("--add-opens=java.base/java.lang=ALL-UNNAMED")
   }
 }
 
@@ -47,13 +52,18 @@ tasks.register('detektFormat', JavaExec) {
   def config = "$rootDir/buildconfig/detekt.yml"
   def exclude = ".*/resources/.*,.*/build/.*"
   def report = "html:${project.buildDir}/reports/detekt.html"
-  def params = ['--version',
-                '--auto-correct',
-                '-i', input,
-                '-c', config,
-                '-ex', exclude,
-                '-r', report]
+  def autoCorrect = "--auto-correct"
+
+  def params = [
+      autoCorrect,
+      '-i', input,
+      '-c', config,
+      '-ex', exclude,
+      '-r', report
+  ]
+
   args(params)
+  jvmArgs("--add-opens=java.base/java.lang=ALL-UNNAMED")
 }
 
 private String getDiffedFilesFromBranch() {
