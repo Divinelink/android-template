@@ -1,7 +1,6 @@
 import modules.sharedModule
 import modules.wModule
 
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
   alias(libs.plugins.application)
   alias(libs.plugins.kotlin.android)
@@ -10,7 +9,8 @@ plugins {
 }
 
 android {
-  namespace = "com.andreolas"
+  namespace = "com.andreolas.template"
+  compileSdk = Versions.COMPILE_SDK_VERSION
 
   defaultConfig {
     applicationId = "com.andreolas.template"

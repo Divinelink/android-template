@@ -4,14 +4,12 @@ import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.LibraryPlugin
 
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
   alias(libs.plugins.application) apply false
   alias(libs.plugins.kotlin.android) apply false
   alias(libs.plugins.com.android.library) apply false
   alias(libs.plugins.detekt) version libs.versions.detekt
 }
-true // Needed to make the Suppress annotation work for the plugins block
 
 subprojects {
   project.plugins.configureAppAndModules(project = project)

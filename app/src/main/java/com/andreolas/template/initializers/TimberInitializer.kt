@@ -2,7 +2,7 @@ package com.andreolas.template.initializers
 
 import android.content.Context
 import androidx.startup.Initializer
-import com.andreolas.BuildConfig
+import com.andreolas.template.BuildConfig
 import timber.log.Timber
 
 class TimberInitializer : Initializer<Unit> {
