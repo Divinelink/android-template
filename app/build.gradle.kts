@@ -77,3 +77,33 @@ dependencies {
   implementation(wModule("di"))
   implementation(sharedModule("resources"))
 }
+
+koverReport {
+  androidReports("debug") {
+    filters {
+      excludes {
+        classes(
+          "*Fragment",
+          "*Activity",
+          "*.BuildConfig",
+          "*.BR",
+          "*.databinding.*",
+          "*Manifest*",
+          "*androidx*",
+        )
+        annotatedBy(
+          "*Composable*",
+          "Preview",
+        )
+      }
+    }
+
+    html {
+      setReportDir(layout.buildDirectory.dir("all-projects-reports"))
+    }
+
+    xml {
+      setReportFile(layout.buildDirectory.file("all-projects-reports/kover.xml"))
+    }
+  }
+}

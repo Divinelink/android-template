@@ -9,11 +9,13 @@ plugins {
   alias(libs.plugins.kotlin.android) apply false
   alias(libs.plugins.com.android.library) apply false
   alias(libs.plugins.detekt) version libs.versions.detekt
+  alias(libs.plugins.kover) version libs.versions.kover
 }
 
 subprojects {
   project.plugins.configureAppAndModules(project = project)
   apply(from = buildscripts("detekt.gradle"))
+  plugins.apply("org.jetbrains.kotlinx.kover")
 }
 
 fun PluginContainer.configureAppAndModules(project: Project) = apply {
