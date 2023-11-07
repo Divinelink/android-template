@@ -15,6 +15,7 @@ plugins {
 subprojects {
   project.plugins.configureAppAndModules(project = project)
   apply(from = buildscripts("detekt.gradle"))
+  apply(from = buildscripts("setup.gradle"))
   plugins.apply("org.jetbrains.kotlinx.kover")
 }
 
