@@ -1,4 +1,4 @@
-package com.andreolas.theme.ui.theme
+package template.theme.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.staticCompositionLocalOf

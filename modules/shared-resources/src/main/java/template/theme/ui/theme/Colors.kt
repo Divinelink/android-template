@@ -1,5 +1,5 @@
 @file:Suppress("MagicNumber")
-package com.andreolas.theme.ui.theme
+package template.theme.ui.theme
 
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme

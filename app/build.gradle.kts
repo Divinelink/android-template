@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-  namespace = "com.andreolas.template"
+  namespace = "template"
   compileSdk = Versions.COMPILE_SDK_VERSION
 
   defaultConfig {
-    applicationId = "com.andreolas.template"
+    applicationId = "template.app.id"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables {

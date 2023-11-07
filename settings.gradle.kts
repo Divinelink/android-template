@@ -17,6 +17,6 @@ rootProject.name = "template"
 include(
   ":app",
   ":modules:shared-resources",
+  ":modules:api",
+  ":modules:di",
 )
-include(":modules:api")
-include(":modules:di")

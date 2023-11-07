@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-  namespace = "com.andreolas.di"
+  namespace = "template.di"
 }
 
 dependencies {

@@ -1,4 +1,4 @@
-package com.andreolas.theme.ui.theme
+package template.theme.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -14,7 +14,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 @Composable
-fun AppTheme(
+fun TemplateTheme(
   darkTheme: Boolean = isSystemInDarkTheme(),
   dynamicColor: Boolean = true,
   content: @Composable () -> Unit

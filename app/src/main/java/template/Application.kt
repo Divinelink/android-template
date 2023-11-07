@@ -1,4 +1,4 @@
-package com.andreolas.template
+package template
 
 import android.app.Application
 

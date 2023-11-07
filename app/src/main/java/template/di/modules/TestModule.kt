@@ -1,6 +1,6 @@
-package com.andreolas.template.di.modules
+package template.di.modules
 
-import com.andreolas.di.DepsQualifiers
+import template.di.DepsQualifiers
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 

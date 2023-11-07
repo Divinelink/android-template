@@ -27,7 +27,7 @@ tasks.register('deleteSetupCode') {
 
 tasks.register('renameAppPackage', Copy) {
     description "Renames the template package in the app module."
-    group "Template Setup"
+    group null
 
     def newPackageAsDirectory = renameConfig.newPackage.replaceAll("\\.", "/")
     def startingDirectory = "${rootDir}/app/src/main/java/${renameConfig.templateName}"
@@ -62,12 +62,18 @@ tasks.register('renameAppPackage', Copy) {
 
 tasks.register('replaceTemplateReferences') {
     description "Replaces references to template in various files."
-    group "Template Setup"
+    group null
 
     doLast {
         replaceTextInFile("${rootDir}/app/src/main/AndroidManifest.xml",
             "${renameConfig.templateName}.MainActivity",
-            "${renameConfig.newPackage}.MainActivity",)
+            "${renameConfig.newPackage}.MainActivity",
+        )
+
+        replaceTextInFile("${rootDir}/app/src/main/AndroidManifest.xml",
+            "${renameConfig.templateName}.initializers",
+            "${renameConfig.newPackage}.initializers",
+        )
 
         replaceTextInFile("${rootDir}/app/build.gradle.kts",
             "namespace = \"${renameConfig.templateName}\"",
@@ -84,12 +90,27 @@ tasks.register('replaceTemplateReferences') {
         replaceTextInFile("${rootDir}/app/src/main/res/values/strings.xml",
             "<string name=\"app_name\">${renameConfig.templateName}</string>",
             "<string name=\"app_name\">${renameConfig.newProjectName}</string>",)
+
+        replaceTextInFile("${rootDir}/app/src/main/res/values/strings.xml",
+            "<string name=\"app_name\">${renameConfig.templateName}</string>",
+            "<string name=\"app_name\">${renameConfig.newProjectName}</string>",)
+
+        // Update the theme name in the themes.xml file
+        replaceTextInFile("${rootDir}/app/src/main/res/values/themes.xml",
+            "${renameConfig.templateMaterialThemeName}",
+            "${renameConfig.newMaterialThemeName}",
+        )
+
+        replaceTextInFile("${rootDir}/app/src/main/AndroidManifest.xml",
+            "@style/Theme.${renameConfig.templateMaterialThemeName}",
+            "@style/Theme.${renameConfig.newMaterialThemeName}",
+        )
     }
 }
 
 tasks.register('keepOrRemoveDependencies') {
     description "Keeps or removes certain dependencies defined in renameConfig."
-    group "Template Setup"
+    group null
 
     doLast {
         def filesWithDependencies = ["${rootDir}/build.gradle.kts",
@@ -117,10 +138,13 @@ tasks.register('renameTemplate') {
     description "Runs all of the necessary template setup tasks based on the renameConfig."
     group "Template Setup"
 
-    dependsOn(keepOrRemoveDependencies,
+    dependsOn(
+        keepOrRemoveDependencies,
+        renameAllModules,
         renameAppPackage,
         replaceTemplateReferences,
-        deleteSetupCode,)
+        deleteSetupCode,
+    )
 
     doLast {
         exec {
@@ -152,5 +176,62 @@ static def removeTextFromFile(fileName, text) {
             file.append(line)
             file.append("\n")
         }
+    }
+}
+
+def subModules = ['di', 'api', 'shared-resources']
+subModules.each { subModule ->
+    renameModule(renameConfig, subModule)
+    updateNamespaceForModule(renameConfig.newPackage, subModule)
+}
+
+def renameModule(renameConfig, subModule) {
+    tasks.register("rename${subModule}Package", Copy) {
+        description "Renames the template package in the $subModule module."
+        group null
+
+        def newPackageAsDirectory = renameConfig.newPackage.replaceAll("\\.", "/")
+        def startingDirectory = "${rootDir}/modules/${subModule}/src/main/java/template"
+        def endingDirectory = "${rootDir}/modules/${subModule}/src/main/java/${newPackageAsDirectory}"
+
+        from(startingDirectory)
+        into(endingDirectory)
+
+        filter { line ->
+            line.replaceAll("package ${renameConfig.templateName}", "package ${renameConfig.newPackage}")
+        }
+
+        filter { line ->
+            line.replaceAll("import ${renameConfig.templateName}", "import ${renameConfig.newPackage}")
+        }
+
+        filter { line ->
+            line.replaceAll("${renameConfig.templateMaterialThemeName}", "${renameConfig.newMaterialThemeName}")
+        }
+
+        doLast {
+            delete(startingDirectory)
+        }
+    }
+}
+
+def updateNamespaceForModule(namespace, moduleName) {
+    tasks.register("update${moduleName}Namespace") {
+        description "Updates the namespace for the $moduleName module."
+        group null
+
+        doLast {
+            def buildGradleKts = file("${rootDir}/modules/$moduleName/build.gradle.kts")
+            buildGradleKts.text = buildGradleKts.text.replaceAll("namespace = \"[^\"]*\"", "namespace = \"$namespace.${moduleName.replace('-', '.')}\"")
+        }
+    }
+}
+
+tasks.register('renameAllModules') {
+    description "Runs the package and namespace renaming tasks for all sub-modules."
+    group null
+
+    subModules.each { subModule ->
+        dependsOn("rename${subModule}Package", "update${subModule}Namespace")
     }
 }

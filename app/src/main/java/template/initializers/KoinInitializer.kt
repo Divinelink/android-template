@@ -1,11 +1,12 @@
-package com.andreolas.template.initializers
+package template.initializers
 
 import android.content.Context
 import androidx.startup.Initializer
-import com.andreolas.template.di.modules.diModules
+import template.di.modules.diModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+
 class KoinInitializer : Initializer<Unit> {
 
   override fun create(context: Context) {

@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-  namespace = "com.andreolas.shared.resources"
+  namespace = "template.shared.resources"
 
   buildFeatures {
     compose = true

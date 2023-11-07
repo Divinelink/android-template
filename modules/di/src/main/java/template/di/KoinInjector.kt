@@ -1,4 +1,4 @@
-package com.andreolas.di
+package template.di
 
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

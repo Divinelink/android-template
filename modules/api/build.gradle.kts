@@ -4,5 +4,5 @@ plugins {
 }
 
 android {
-  namespace = "com.andreolas.api"
+  namespace = "template.api"
 }

@@ -1,9 +1,9 @@
-package com.andreolas.template.initializers
+package template.initializers
 
 import android.content.Context
 import androidx.startup.Initializer
-import com.andreolas.template.BuildConfig
 import timber.log.Timber
+import template.BuildConfig
 
 class TimberInitializer : Initializer<Unit> {
 

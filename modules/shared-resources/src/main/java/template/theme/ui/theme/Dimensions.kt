@@ -1,6 +1,6 @@
 @file:Suppress("PropertyName", "ConstructorParameterNaming")
 
-package com.andreolas.theme.ui.theme
+package template.theme.ui.theme
 
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
