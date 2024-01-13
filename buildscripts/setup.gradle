@@ -65,6 +65,12 @@ tasks.register('replaceTemplateReferences') {
     group null
 
     doLast {
+        // README file
+        replaceTextInFile("${rootDir}/README.md",
+            "android-${renameConfig.templateName}",
+            "${renameConfig.newProjectName}",
+        )
+
         replaceTextInFile("${rootDir}/app/src/main/AndroidManifest.xml",
             "${renameConfig.templateName}.MainActivity",
             "${renameConfig.newPackage}.MainActivity",
